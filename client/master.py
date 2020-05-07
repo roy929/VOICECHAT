@@ -15,8 +15,6 @@ class App(Tk):
     def __init__(self, *args, **kwargs):
         Tk.__init__(self, *args, **kwargs)
         self.title('VoiceChat')
-        # Setup Menu
-        MainMenu(self)
         # Setup Frame
         self.container = Frame(self)
         self.container.pack(side="top", fill="both", expand=True)
@@ -361,39 +359,6 @@ class Register(Frame):
                 self.controller.frames[Login].enter(name, pas)
             else:
                 pop_up_message('username already used')
-
-
-# class PageOne(Frame):
-#     def __init__(self, parent, controller):
-#         Frame.__init__(self, parent)
-#
-#         label = Label(self, text="Page One")
-#         label.pack(padx=10, pady=10)
-#         start_page = Button(self, text="Start Page", command=lambda: controller.show_frame(StartPage))
-#         start_page.pack()
-#         page_two = Button(self, text="Page Two", command=lambda: controller.show_frame(PageTwo))
-#         page_two.pack()
-#
-#
-# class PageTwo(Frame):
-#     def __init__(self, parent, controller):
-#         Frame.__init__(self, parent)
-#
-#         label = Label(self, text="Page Two")
-#         label.pack(padx=10, pady=10)
-#         start_page = Button(self, text="Start Page", command=lambda: controller.show_frame(StartPage))
-#         start_page.pack()
-#         page_one = Button(self, text="Page One", command=lambda: controller.show_frame(PageOne))
-#         page_one.pack()
-
-# menu bar
-class MainMenu:
-    def __init__(self, master):
-        menubar = Menu(master)
-        filemenu = Menu(menubar, tearoff=0)
-        filemenu.add_command(label="Exit", command=master.quit)
-        menubar.add_cascade(label="File", menu=filemenu)
-        master.config(menu=menubar)
 
 
 if __name__ == '__main__':
