@@ -62,13 +62,18 @@ class Chat(Frame):
     def __init__(self, master, controller):
         super().__init__(master)
         self.controller = controller
-        Label(self, text=f'In chat with {controller.target}', font=('Ariel', 20), foreground='magenta').pack()
+        self.msg = Label(self, font=('Ariel', 20), foreground='green')
+        self.msg.pack()
         Button(self, text='End Chat', command=self.stop_chat).pack()
 
     def stop_chat(self):
         ask_server.stop(self.controller.username, 'call')
 
     def start_chat(self):
+        user = self.controller.target
+        if not user:
+            user = self.controller.user_called
+        self.msg['text'] = f'In chat with {user}'
         self.v1 = ChatClient()
         Thread(target=self.chat_ended, name='chat_ended', daemon=True).start()
         self.v1.start()

@@ -212,5 +212,5 @@ if __name__ == '__main__':
     name = socket.gethostname()
     print(f'hostname : {name}')
     ip = socket.gethostbyname(name)
-    print(f'server started\nIP : {ip}')
+    print(f'Server started!\nIP : {ip}')
     app.run(debug=True, host='0.0.0.0', port=5000)
