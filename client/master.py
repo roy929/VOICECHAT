@@ -74,16 +74,16 @@ class Chat(Frame):
         if not user:
             user = self.controller.user_called
         self.msg['text'] = f'In chat with {user}'
-        self.v1 = ChatClient()
+        self.client = ChatClient()
         Thread(target=self.chat_ended, name='chat_ended', daemon=True).start()
-        self.v1.start()
+        self.client.start()
 
     def chat_ended(self):
         time.sleep(2)
         while True:
             time.sleep(1)
             if not ask_server.is_in_chat(self.controller.username):
-                self.v1.end()
+                self.client.end()
                 self.controller.show_frame(Main)
                 time.sleep(0.4)
                 self.controller.frames[Called].start_checking()
