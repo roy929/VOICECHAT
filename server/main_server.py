@@ -3,6 +3,16 @@ from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 
+
+def ip4_addresses():
+    from netifaces import interfaces, ifaddresses, AF_INET
+    ip_list = []
+    for interface in interfaces():
+        for link in ifaddresses(interface)[AF_INET]:
+            ip_list.append(link['addr'])
+    return ip_list
+
+
 project_dir = os.path.dirname(os.path.abspath(__file__))
 database_file = "sqlite:///{}".format(os.path.join(project_dir, "database.db"))
 
@@ -209,8 +219,8 @@ def check_connection():
 if __name__ == '__main__':
     # db.create_all(app=app)
     import socket
-    name = socket.gethostname()
-    print(f'hostname : {name}')
-    ip = socket.gethostbyname(name)
-    print(f'Server started!\nIP : {ip}')
+    IPs = ip4_addresses()
+    print(f'Server started!')
+    print(f'IPs : {IPs}')
+    print(f'hostname : {socket.gethostname()}')
     app.run(debug=True, host='0.0.0.0', port=5000)
